@@ -1,0 +1,96 @@
+<section class="footer">
+    <div class="footer-container container">
+        <h2>MyProject</h2>
+        <div class="footer-box">
+            <h3>Chính Sách</h3>
+            <a href="#">Bảo mật</a>
+            <a href="#">Khiếu nạ<i></i></a>
+            <a href="#">Điều khoản & Cam kết</a>
+        </div>
+        <div class="footer-box">
+            <h3>Hệ Thống</h3>
+            <a href="#">Tìm trọ</a>
+            <a href="#">Tìm người ở ghép</a>
+            <a href="#">Đăng tin</a>
+        </div>
+        <div class="footer-box">
+            <h3>Liên Hệ</h3>
+            <a href="#">(+84)12345678</a>
+            <a href="#">yourmail@gmail.com</a>
+            <div class="social">
+                <a href=""><i class='bx bxl-facebook'></i></a>
+                <a href=""><i class='bx bxl-twitter'></i></a>
+                <a href=""><i class='bx bxl-instagram'></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Copyright -->
+<div class="copyright">
+    <p>@Copyright - 2023</p>
+</div>
+</body>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+<script>
+// Khai báo access token của mapbox
+const api_key = 'pk.eyJ1IjoibGFuZ29jaGlldSIsImEiOiJjbGg5NzhydjcwNG05M3RvZ2I3cnd4a24yIn0.AROXN28XWMk5d7VdSv4iKw';
+mapboxgl.accessToken = api_key;
+// Khai báo hai địa điểm
+
+// Hàm chuyển đổi địa điểm sang kinh độ và vĩ độ
+function geocode(place) {
+  // Tạo một URL cho yêu cầu HTTP
+  var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + place + '.json?access_token=' + mapboxgl.accessToken;
+  // Gửi yêu cầu HTTP bằng hàm fetch
+  return fetch(url)
+    .then(function (response) {
+      return response.json(); // Trả về dữ liệu dưới dạng JSON
+    })
+    .then(function (data) {
+      var result = data.features[0]; // Lấy kết quả đầu tiên
+      var name = result.place_name; // Lấy tên địa điểm
+      var lat = result.center[1]; // Lấy vĩ độ
+      var lng = result.center[0]; // Lấy kinh độ
+      return {name: name, lat: lat, lng: lng}; // Trả về một đối tượng có tên và tọa độ
+    })
+    .catch(function (error) {
+      console.error(error); // In ra lỗi nếu có
+    });
+}
+
+// Hàm tính khoảng cách giữa hai tọa độ bằng công thức Haversine
+function distance(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Bán kính trái đất tính bằng km
+  var dLat = deg2rad(lat2-lat1); // Chuyển đổi vĩ độ thành radian
+  var dLon = deg2rad(lon2-lon1); // Chuyển đổi kinh độ thành radian
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c; // Khoảng cách tính bằng km
+  return d;
+}
+
+// Hàm chuyển đổi từ độ sang radian
+function deg2rad(deg) {
+  return deg * (Math.PI/180);
+}
+function calculate() {
+  var place1 = document.getElementById('place1').value;
+  // var place2 = document.getElementById('place2').value;
+  document.querySelectorAll(".house-info").forEach(Element =>{
+    
+      var place2 = Element.querySelector('.place2').innerHTML;
+      // Gọi hàm chuyển đổi cho hai địa điểm và tính khoảng cách giữa chúng
+      Promise.all([geocode(place1), geocode(place2)]) // Sử dụng Promise.all để chờ cho hai yêu cầu fetch hoàn thành
+        .then(function (results) {
+          var p1 = results[0]; // Lấy kết quả cho địa điểm thứ nhất
+          var p2 = results[1]; // Lấy kết quả cho địa điểm thứ hai
+          var dist = distance(p1.lat, p1.lng, p2.lat, p2.lng); // Tính khoảng cách giữa hai tọa độ bằng hàm distance
+          
+          console.log('Khoảng cách từ ' + p1.name + ' đến ' + p2.name + ' là ' + dist.toFixed(2) + ' km'); // In ra kết quả trong console
+          Element.querySelector('.result').innerHTML = dist.toFixed(2) + " km";
+        });
+  }) 
+}
+</script>
+
+</html>

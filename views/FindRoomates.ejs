@@ -1,0 +1,84 @@
+<%- include("partials/header") -%>
+<div class="container main">
+        <input type="text" name="place1" id="place1" class="left-col" style="height: 50px;" >
+        <button type="submit" onclick="calculate()" style="height: 50px;">Tìm Kiếm</button>
+    <div class="list-container">
+        <div class="left-col">
+            <!-- <p>Kết quả: Hơn 200 bài đăng tìm trọ</p> -->
+            <h1>Tìm người ở ghép</h1>
+        <%    posts.forEach(function(post){ %>
+                <div class="house">
+                    <div class="house-img" style="text-align: center;">
+                        <img src="data:post/<%=post.Img.contentType%>;base64,<%=post.Img.data.toString('base64')%>" style="width: 200px;height:150px;margin-left: 50px;" alt="Err"/>
+                    </div>
+                    <div class="house-info" >
+                        <p><%= post.Type %> - <%= post.Format %></p>
+                        <a href="/pov/<%= post._id %>"><h3><%=post.Tittle %></h3></a>
+                        <p class="place2"><%= post.Address %></p>
+                        <div class="house-price">
+                            <h4><%= post.Price %></h4>
+                            <h4><div class="result"></div></h4>
+                        </div>
+                        <a href="/pov/<%= post._id %>" class="btn">Xem Chi Tiết</a>
+                    </div>
+                </div>
+        <%    }) %>
+            
+        </div>
+
+        <!-- <div class="right-col">
+            <div class="side-bar">
+                <h2 style="margin-left:70px;">Bộ lọc</h2>
+                <h3 style="margin-left:45px;">Theo hình thức</h3>
+                <div class="filter">
+                    <input type="radio">
+                    <p>Nhà trọ</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>Ký túc xá</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>Chung cư mini</p>
+                </div>
+                <h3 style="margin-left: 70px;">Theo giá</h3>
+                <div class="filter">
+                    <input type="radio">
+                    <p>Tất cả</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>Dưới 1 triệu</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>1 triệu - 2 triệu</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>2 triệu - 3 triệu</p>
+                </div>
+                <div class="filter">
+                    <input type="radio">
+                    <p>3 triệu - 5 triệu</p>
+                </div>
+                <div class="sidebar-link">
+                    <button type="submit" class="btn" style="margin-right:45px; border-width:0px">Tìm kiếm</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="pagination">
+    <!-- <img src="img1/arrow.png" alt="">
+    <span class="current">1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>&middot; &middot; &middot; &middot;</span>
+    <span>20</span>
+    <img src="img1/arrow.png" class="right-arrow" alt=""> -->
+</div>
+<%- include("partials/footer") -%>

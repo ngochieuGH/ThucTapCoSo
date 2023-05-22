@@ -1,0 +1,23 @@
+    <%- include("partials/header") -%>
+    <!-- Log In -->
+    <div class="login container">
+        <div class="login-container">
+            <h2>Đăng nhập để tiếp tục</h2>
+            <p>Vui lòng đăng nhập để sử dụng dịch vụ</p>
+            <!-- Login Form -->
+            <form action="/login" method="post">
+                <span>Email</span>
+                <input type="email" name="email" id="" placeholder="yourmail@gmail.com" required>
+                <span>Password</span>
+                <input type="password" name="pass" id="" placeholder="Password" required>
+                <input type="submit" value="Đăng nhập" class="buttom" >
+                <a href="#">Quên mật khẩu?</a>
+            </form>
+            <a href="/SignUp" class="btn">Chưa có tài khoản ?</a>
+        </div>
+        <!-- Log In Image -->
+        <div class="login-image">
+            <img src="img/login.png" alt="" style="margin-left: 100px;">
+        </div>
+    </div>
+    <%- include("partials/footer") -%>

@@ -1,0 +1,28 @@
+<%- include("partials/header") -%>
+    <!-- Sign Up -->
+    <div class="login container">
+        <div class="login-container">
+            <h2>Mời bạn đăng ký tài khoản</h2>
+            <!-- <p>Already have accout <a href="login.html">Log In</a></p> -->
+            <!-- Login Form -->
+            <form action="/SignUp" method="post">
+                <span>Họ và tên</span>
+                <input type="text" name="name" id="" placeholder="Nhập họ và tên" required>
+                <span>Email</span>
+                <input type="email" name="email" id="" placeholder="Nhập email" required>
+                <span>Mật khẩu</span>
+                <input type="password" name="pass" id="" placeholder="Nhập mật khẩu" required>
+                <span>Xác nhận lại mật khẩu</span>
+                <input type="password" name="" id="" placeholder="Nhập lại mật khẩu" required>
+                <a href="/login" style="margin-bottom: 15px;">Đã có tài khoản</a>
+                <input type="submit" value="Sign Up" class="buttom">
+                <!-- <a href="login.html">Đã có tài khoản</a> -->
+            </form>
+            <!-- <a href="login.html" class="btn">Log In</a> -->
+        </div>
+        <!-- Log In Image -->
+        <div class="login-image">
+            <img src="img/sign-up.png" alt="" style="margin-left: 100px;">
+        </div>
+    </div>
+<%- include("partials/footer") -%>

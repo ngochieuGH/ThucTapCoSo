@@ -1,0 +1,62 @@
+<%- include("partials/header") -%>
+<div class="container main" style="margin-bottom: 100px;">
+    <div class="container">
+        <div class="left">
+            <h1 style="margin-bottom: 20px;">Bài viết của bạn</h1>
+            <%    for(var i=0 ; i<Content.length ; i++){    %>
+            <%    if( Content[i].Status && Content[i].YoN ){ %>
+                    <div class="house" style="background-color: #D9F8C4;">
+                        <div class="house-img">
+                            <img src="data:Content[i]/<%=Content[i].Img.contentType%>;base64,<%=Content[i].Img.data.toString('base64')%>" style="width: 150px;height:150px;margin-left: 100px;" alt="Err"/>
+                        </div>
+                        <div class="house-info" style="margin-right: 100px;">
+                            <p><%= Content[i].Type %> - <%= Content[i].Format %></p>
+                            <a href="/pov/<%= Content[i]._id %>"><h3><%=Content[i].Tittle %></h3></a>
+                            <p><%= Content[i].Address %></p>
+                            <div class="house-price">
+                                <h4><%= Content[i].Price %></h4>
+                            </div>
+                            <a href="/pov/<%= Content[i]._id %>" class="btn">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+            <%    } else if(!Content[i].Status && Content[i].YoN){ %>
+                    <div class="house">
+                        <div class="house-img">
+                            <img src="data:Content[i]/<%=Content[i].Img.contentType%>;base64,<%=Content[i].Img.data.toString('base64')%>" style="width: 150px;height:150px;margin-left: 100px;" alt="Err"/>
+                        </div>
+                        <div class="house-info" style="margin-right: 100px;">
+                            <p><%= Content[i].Type %> - <%= Content[i].Format %></p>
+                            <a href="/pov/<%= Content[i]._id %>"><h3><%=Content[i].Tittle %></h3></a>
+                            <p><%= Content[i].Address %></p>
+                            <div class="house-price">
+                                <h4><%= Content[i].Price %></h4>
+                            </div>
+                            <a href="/pov/<%= Content[i]._id %>" class="btn">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+            <%    } else{ %>
+                <div class="house" style="background-color: #F37878;">
+                    <div class="house-img">
+                        <img src="data:Content[i]/<%=Content[i].Img.contentType%>;base64,<%=Content[i].Img.data.toString('base64')%>" style="width: 150px;height:150px;margin-left: 100px;" alt="Err"/>
+                    </div>
+                    <div class="house-info" style="margin-right: 100px;">
+                        <p><%= Content[i].Type %> - <%= Content[i].Format %></p>
+                        <a href="/pov/<%= Content[i]._id %>"><h3><%=Content[i].Tittle %></h3></a>
+                        <p><%= Content[i].Address %></p>
+                        <div class="house-price">
+                            <h4><%= Content[i].Price %></h4>
+                        </div>
+                        <a href="/pov/<%= Content[i]._id %>" class="btn">Xem Chi Tiết</a>
+                    </div>
+                </div>
+            <%    } %>
+            <%    } %>
+        </div>
+    </div>
+</div>
+<!-- <%    Content.forEach(function(a){ %>
+       <h1> <%= a.Title %></h1>
+       <p> <%= a.Post %></p>
+<%    }); %> -->
+
+<%- include("partials/footer") -%>
